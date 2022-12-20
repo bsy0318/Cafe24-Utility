@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         	Cafe24_AutoDeliveryCheck
 // @namespace	    http://*.cafe24.com/
-// @version      	0.2
+// @version      	0.3
 // @description	    Cafe24에서 배송 중에 있는 상품들을 자동으로 완료 처리 합니다.
 // @author	        Seoyeon Bae
 // @match	        https://*.cafe24.com/admin/php/shop1/s/shipped_end_list.php*
@@ -22,7 +22,7 @@ function checkStatus() {
         let user_carr = $(item).text().trim().split(' ').join('').split('\n');
 
         let req_carr_id = getCarrierByCode(user_carr[0])[0].id;
-        let url = 'https://apis.tracker.delivery/carriers/' + req_carr_id + '/tracks/' + user_carr[3];
+        let url = 'https://apis.tracker.delivery/carriers/' + req_carr_id + '/tracks/' + user_carr[3].replaceAll('-','');
         console.log(url);
         let apixhr = new XMLHttpRequest();
         apixhr.open('GET', url);
