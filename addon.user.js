@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         	Cafe24_AutoDeliveryCheck
-// @namespace	http://*.cafe24.com/
-// @version      	0.1
-// @description	Cafe24에서 배송 중에 있는 상품들을 자동으로 완료 처리 합니다.
-// @author	Seoyeon Bae
-// @match	https://*.cafe24.com/admin/php/shop1/s/shipped_end_list.php*
-// @icon		https://www.google.com/s2/favicons?sz=64&domain=cafe24.com
-// @updateURL	https://github.com/bsy0317/Cafe24-Utility/raw/main/addon.user.js
-// @downloadURL	https://github.com/bsy0317/Cafe24-Utility/raw/main/addon.user.js
-// @run-at	document-idle
+// @namespace	    http://*.cafe24.com/
+// @version      	0.2
+// @description	    Cafe24에서 배송 중에 있는 상품들을 자동으로 완료 처리 합니다.
+// @author	        Seoyeon Bae
+// @match	        https://*.cafe24.com/admin/php/shop1/s/shipped_end_list.php*
+// @icon		    https://www.google.com/s2/favicons?sz=64&domain=cafe24.com
+// @updateURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/addon.user.js
+// @downloadURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/addon.user.js
+// @run-at	        document-idle
 // ==/UserScript==
 
 var Carrier_list = Start();
@@ -42,7 +42,6 @@ function checkStatus() {
                 }
             } else {
                 $(item).append('<br><span style="color: rgb(166, 0, 0); font-weight: bold;">' + '운송장오류' + '</span>');
-                return "200 But Error";
             }
         };
         apixhr.send();
