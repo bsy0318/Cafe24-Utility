@@ -73,7 +73,7 @@ function Start() {
 function getCarrierByCode(name) {
     return Carrier_list.filter(
         function(Carrier_list) {
-            return Carrier_list.name.search(name) != -1
+            return Carrier_list.name.replaceAll(' ','').search(name) != -1
         }
     );
 }
