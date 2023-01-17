@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         	Cafe24_AutoDeliveryCheck
 // @namespace	    http://*.cafe24.com/
-// @version      	20230117-1
+// @version      	20230117-2
 // @description	    Cafe24에서 배송 중에 있는 상품들을 자동으로 완료 처리 합니다.
 // @author	        Seoyeon Bae
 // @match	        https://*.cafe24.com/admin/php/shop1/s/shipped_end_list.php*
@@ -24,7 +24,7 @@ function checkStatus() {
 
         if(typeof getCarrierByCode(user_carr[0])[0] == 'undefined'){
             $(item).append('<br><span style="color: rgb(153, 0, 204); font-weight: bold;">미지원 택배사</span>');
-            ignore_count = ignore_count+1;
+            //ignore_count = ignore_count+1;
             return true;
         }
         let req_carr_id = getCarrierByCode(user_carr[0])[0].id;
