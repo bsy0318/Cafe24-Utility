@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         	Cafe24_AutoDeliveryCheck
 // @namespace	    http://*.cafe24.com/
-// @version      	20230117-2
+// @version      	20230126-1
 // @description	    Cafe24에서 배송 중에 있는 상품들을 자동으로 완료 처리 합니다.
 // @author	        Seoyeon Bae
 // @match	        https://*.cafe24.com/admin/php/shop1/s/shipped_end_list.php*
@@ -11,7 +11,6 @@
 // @run-at	        document-idle
 // ==/UserScript==
 
-var ignore_count=0;
 var Carrier_list = Start();
 var checkbox_array = new Array();
 $('#searchResultList > tbody > tr > td.cellMerge.eCellHeight > div > table > tbody > tr > td:nth-child(1) > input.chkbox').each(function(index, item) {
@@ -24,7 +23,6 @@ function checkStatus() {
 
         if(typeof getCarrierByCode(user_carr[0])[0] == 'undefined'){
             $(item).append('<br><span style="color: rgb(153, 0, 204); font-weight: bold;">미지원 택배사</span>');
-            //ignore_count = ignore_count+1;
             return true;
         }
         let req_carr_id = getCarrierByCode(user_carr[0])[0].id;
@@ -39,7 +37,7 @@ function checkStatus() {
                     $(item).append('<br><span style="color: rgb(166, 0, 0); font-weight: bold;">' + '운송장오류' + '</span>');
                 } else {
                     console.log(user_carr[3] + json['state']['text']);
-                    if (json['state']['text'].search("완료") != -1) {
+                    if ((json['state']['text'].search("완료") != -1)&&(json['state']['text'].search("접수완료") == -1)){
                         $(item).append('<br><span style="color: rgb(0, 124, 14); font-weight: bold;">' + json['state']['text'] + '</span>');
                         $(checkbox_array[index+ignore_count]).attr('checked', 'true');
                     } else {
