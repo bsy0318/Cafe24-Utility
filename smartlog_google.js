@@ -6,8 +6,8 @@
 // @author	        배서연
 // @match	        https://smlog.co.kr/hmisNew/vsl_live.html*
 // @icon		    https://www.google.com/s2/favicons?sz=64&domain=smlog.co.kr
-// @updateURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/addon.user.js
-// @downloadURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/addon.user.js
+// @updateURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/smartlog_google.js
+// @downloadURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/smartlog_google.js
 // @run-at	        document-idle
 // ==/UserScript==
 
