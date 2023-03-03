@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         	SMARTLOG_GOOGLE.JS
 // @namespace	    https://smlog.co.kr
-// @version      	20230303-01
+// @version      	20230303-0
 // @description	    스마트로그 실시간방문자에서 구글쇼핑탭 유입시 상품명으로 치환
-// @author	        배서연
+// @author	        Seoyeon Bae
 // @match	        https://smlog.co.kr/hmisNew/vsl_live.html*
 // @icon		    https://www.google.com/s2/favicons?sz=64&domain=smlog.co.kr
 // @updateURL	    https://github.com/bsy0317/Cafe24-Utility/raw/main/smartlog_google.js
