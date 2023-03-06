@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name	SMARTLOG_GOOGLE.JS
 // @namespace	https://smlog.co.kr
-// @version	20230303.2
+// @version	20230306.01
 // @description	스마트로그 실시간방문자에서 구글쇼핑탭 유입시 상품명으로 치환
 // @author	Seoyeon Bae
-// @match	https://smlog.co.kr/hmisNew/vsl_live.html*
+// @match	*://smlog.co.kr/hmisNew/vsl_live.html*
 // @icon	https://www.google.com/s2/favicons?sz=64&domain=smlog.co.kr
 // @updateURL	https://github.com/bsy0317/Cafe24-Utility/raw/main/smartlog_google.js
 // @downloadURL	https://github.com/bsy0317/Cafe24-Utility/raw/main/smartlog_google.js
@@ -24,12 +24,25 @@ async function codeToName(code){
 	   let product_name = res.split("var product_name = '")[1].split("';")[0];
 	   let regexStr = /cafe24_ccnaramall_1_\d+/g;
 	   let itemArray = $('[id^="p_row"]').toArray();
-	   for(i=0; i<itemArray.length; i++){
+	   for(let i=0; i<itemArray.length; i++){
 		   let priv_html = $(itemArray[i]).html();
 		   $(itemArray[i]).html(priv_html.replaceAll(code, product_name));
 	   }
-	  }
-	})
+	  },
+	  error: (res) => {
+        switch(res.status) {
+          case 404 :
+            $(itemArray[i]).html(priv_html.replaceAll(code, parseCode+'/404 Error'));
+            break;
+          case 500 :
+            $(itemArray[i]).html(priv_html.replaceAll(code, parseCode+'/500 Error'));
+            break;
+		  default:
+			$(itemArray[i]).html(priv_html.replaceAll(code, parseCode+'/'+res.status+' Error'));
+			break;
+        }
+      }
+	});
 }
 
 async function core(){
