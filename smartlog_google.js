@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name		SMARTLOG_GOOGLE.JS
 // @namespace	https://smlog.co.kr
-// @version		20230420.01
+// @version		20230420.02
 // @description	스마트로그 실시간방문자에서 구글쇼핑탭 유입시 상품명으로 치환
 // @author		Seoyeon Bae
 // @match		*://smlog.co.kr/hmisNew/vsl_live.html*
@@ -19,13 +19,13 @@ function codeToName(code) {
     let parseCode = code.replace('cafe24_ccnaramall_1_', '');
     $.ajax({
         method: 'GET',
-        url: pServer + '/' + hostServer + '/product/detail.html?product_no=' + parseCode,
+        url: pServer + '/' + hostServer + '/amp/product/detail.html?product_no=' + parseCode,
         dataType: 'html',
         async: true, //비동기 여부
 		timeout: 1000,
         success: function(res) {
 			console.log("ajax success");
-            let product_name = res.split("var product_name = '")[1].split("';")[0];
+            let product_name = res.split("<h1 class=\"name\">")[1].split("</h1>")[0];
             let regexStr = /cafe24_ccnaramall_1_\d+/g;
             let itemArray = $('[id^="p_row"]').toArray();
             for (let i = 0; i < itemArray.length; i++) {
