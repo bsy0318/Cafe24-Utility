@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         	CCNARA_BANNER_CALCULATOR_ITEM
 // @namespace	    https://chingchanmall.com/
-// @version      	20230220-1
+// @version      	20230427-1
 // @description	    대형/기타 현수막에서의 가격을 디자인다소에서 받아와 등록하는 스크립트
 // @author	        배서연
 // @run-at	        document-idle
@@ -10,7 +10,9 @@
 var targetProductCategory = '현수막'; //이 카테고리에서만 동작
 var sizeType = "n"; //'a'는 '샘플사이즈', 'n'는 '사이즈변경'
 var supportItemCode = "P000HRFZ";	//기타사이즈 자체상품고유번호
-var pId = "134679"; //상품번호(주소창에 보이는 코드, 기타사이즈 상품번호)
+//var supportItemCode = "P000LPAX";	//디버깅코드
+var pId = "134679";	//상품번호(주소창에 보이는 코드, 기타사이즈 상품번호)
+//var pId = "203499";		//디버깅코드
 
 function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
@@ -87,6 +89,11 @@ function setItemThumb(){										//현수막 썸네일을 전달받아 변경�
 		$('.BigImage').attr('src', imgsrc);						//현수막 썸네일을 변경합니다.
 		$('.prdImg > a > img').attr('src', imgsrc);
 	}
+}
+function setSubmitTime(){										//접수시간 작성하는 스크립트
+	$('#add_option_4').val(new Date().toLocaleString()).blur().trigger('keyup');
+	$('#add_option_4').attr('readonly', true);					//읽기전용
+	$($($('#add_option_4')[0].parentElement)[0].parentElement).hide();	//접수시간 사라지도록 조정
 }
 
 function calc_main(){
@@ -182,9 +189,10 @@ function main(){
 	console.log("[calc_item.js/Main] Customize Calculate Function is Activated :)");
 	document.getElementById('add_option_1').setAttribute('type', 'number');	//숫자만 입력되도록 수정
 	document.getElementById('add_option_2').setAttribute('type', 'number');	//숫자만 입력되도록 수정
-	//setDefaultSize(); //샘플사이즈 자동입력
-	setItemNameCookie(); //상품명 자동입력
-	setItemThumb();		//썸네일 자동변경
+	//setDefaultSize(); 	//샘플사이즈 자동입력
+	setItemNameCookie(); 	//상품명 자동입력
+	setItemThumb();			//썸네일 자동변경
+	setSubmitTime();		//접수시간 자동입력
 	$('#add_option_1').change(function(){
 		calc_main();
 	});
